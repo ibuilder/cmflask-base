@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Construction Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('projects.index') }}">Construction Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.safety.dashboard', project_id=current_project.id) }}">Safety</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.field.daily_reports', project_id=current_project.id) }}">Field</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.engineering.rfis', project_id=current_project.id) }}">Engineering</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.contracts.prime', project_id=current_project.id) }}">Contracts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.cost.budget', project_id=current_project.id) }}">Cost</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.bim.model', project_id=current_project.id) }}">BIM</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('projects.closeout.manuals', project_id=current_project.id) }}">Closeout</a>
+                </li>
+            </ul>
+        </div>
+        <div class="ml-auto">
+            {% if current_user.is_authenticated %}
+                <span class="navbar-text">
+                    Welcome, {{ current_user.username }}!
+                </span>
+                <a class="btn btn-outline-danger ml-2" href="{{ url_for('auth.logout') }}">Logout</a>
+            {% else %}
+                <a class="btn btn-outline-success" href="{{ url_for('auth.login') }}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

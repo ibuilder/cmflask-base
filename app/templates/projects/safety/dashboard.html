@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Safety Dashboard for Project: {{ project.name }}</h1>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Safety Observations</h3>
+                <p>Total Observations: {{ observations_count }}</p>
+                <a href="{{ url_for('projects.safety.observations', project_id=project.id) }}" class="btn btn-primary">View Observations</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Incident Reports</h3>
+                <p>Total Incidents: {{ incidents_count }}</p>
+                <a href="{{ url_for('projects.safety.incidents', project_id=project.id) }}" class="btn btn-primary">View Incidents</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Job Hazard Analysis</h3>
+                <p>Total JHAs: {{ jha_count }}</p>
+                <a href="{{ url_for('projects.safety.jha.list', project_id=project.id) }}" class="btn btn-primary">View JHAs</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Pre-Task Plans</h3>
+                <p>Total PTPs: {{ pretask_count }}</p>
+                <a href="{{ url_for('projects.safety.pretask.list', project_id=project.id) }}" class="btn btn-primary">View PTPs</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Employee Orientations</h3>
+                <p>Total Orientations: {{ orientation_count }}</p>
+                <a href="{{ url_for('projects.safety.orientations.list', project_id=project.id) }}" class="btn btn-primary">View Orientations</a>
+            </div>
+        </div>
+
+        <h3>Recent Incidents</h3>
+        <ul class="list-group">
+            {% for incident in recent_incidents %}
+                <li class="list-group-item">
+                    <strong>{{ incident.title }}</strong> - {{ incident.incident_date }} 
+                    <a href="{{ url_for('projects.safety.incidents.view', id=incident.id) }}" class="btn btn-link">View</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Safety Metrics</h3>
+        <canvas id="safetyMetricsChart"></canvas>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+    <script>
+        var ctx = document.getElementById('safetyMetricsChart').getContext('2d');
+        var safetyMetricsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ months|tojson }},
+                datasets: [{
+                    label: 'Recordable Incidents',
+                    data: {{ recordables_data|tojson }},
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }, {
+                    label: 'Man Hours',
+                    data: {{ manhours_data|tojson }},
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Database Settings</h1>
+        <form method="POST" action="{{ url_for('settings.update_database') }}">
+            <div class="form-group">
+                <label for="db_host">Database Host</label>
+                <input type="text" class="form-control" id="db_host" name="db_host" value="{{ db_host }}" required>
+            </div>
+            <div class="form-group">
+                <label for="db_name">Database Name</label>
+                <input type="text" class="form-control" id="db_name" name="db_name" value="{{ db_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="db_user">Database User</label>
+                <input type="text" class="form-control" id="db_user" name="db_user" value="{{ db_user }}" required>
+            </div>
+            <div class="form-group">
+                <label for="db_password">Database Password</label>
+                <input type="password" class="form-control" id="db_password" name="db_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Settings</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Project Settings</h1>
+        <form method="POST" action="{{ url_for('settings.update_project', project_id=project.id) }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="project_name">Project Name</label>
+                {{ form.project_name(class="form-control", id="project_name") }}
+            </div>
+            <div class="form-group">
+                <label for="project_description">Project Description</label>
+                {{ form.project_description(class="form-control", id="project_description") }}
+            </div>
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                {{ form.start_date(class="form-control", id="start_date") }}
+            </div>
+            <div class="form-group">
+                <label for="end_date">End Date</label>
+                {{ form.end_date(class="form-control", id="end_date") }}
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget</label>
+                {{ form.budget(class="form-control", id="budget") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Project</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

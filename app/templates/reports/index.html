@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Project Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Construction Project Reports</h1>
+        <p class="lead">Welcome to the construction project dashboard. Here you can view and manage various reports related to the project.</p>
+
+        <div class="mt-4">
+            <h2>Available Reports</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{{ url_for('projects.safety.incidents') }}">Incident Reports</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ url_for('projects.safety.observations') }}">Safety Observations</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ url_for('projects.safety.jha') }}">Job Hazard Analysis</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ url_for('projects.safety.pretask') }}">Pre-Task Plans</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ url_for('projects.safety.orientations') }}">Employee Orientations</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

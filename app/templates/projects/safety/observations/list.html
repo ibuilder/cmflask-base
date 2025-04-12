@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Safety Observations</h1>
+    <a href="{{ url_for('projects.safety.create_observation', project_id=project.id) }}" class="btn btn-primary">Create New Observation</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Observation Date</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Severity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for observation in observations %}
+            <tr>
+                <td>{{ observation.title }}</td>
+                <td>{{ observation.description }}</td>
+                <td>{{ observation.observation_date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ observation.location }}</td>
+                <td>{{ observation.category }}</td>
+                <td>{{ observation.severity }}</td>
+                <td>
+                    <a href="{{ url_for('projects.safety.view_observation', id=observation.id) }}" class="btn btn-info">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

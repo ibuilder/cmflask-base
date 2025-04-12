@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Project Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Construction Project Dashboard</h1>
+        <nav class="nav nav-pills flex-column flex-sm-row mb-4">
+            <a class="flex-sm-fill text-sm-center nav-link active" href="{{ url_for('projects.safety.dashboard', project_id=project.id) }}">Safety Dashboard</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.preconstruction.bidders', project_id=project.id) }}">Preconstruction</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.engineering.rfis', project_id=project.id) }}">Engineering</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.field.daily_reports', project_id=project.id) }}">Field</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.contracts.prime', project_id=project.id) }}">Contracts</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.cost.budget', project_id=project.id) }}">Cost</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.bim.model', project_id=project.id) }}">BIM</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{{ url_for('projects.closeout.manuals', project_id=project.id) }}">Closeout</a>
+        </nav>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+requirements.txt
+
+Flask
+Flask-WTF
+Flask-Login
+Flask-SQLAlchemy
+Flask-Migrate
+psycopg2-binary
+requests
+python-dotenv
+web3
+```

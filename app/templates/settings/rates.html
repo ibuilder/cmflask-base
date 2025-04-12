@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rates Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Rates Settings</h1>
+        <p>Manage the rates for labor, materials, and equipment.</p>
+
+        <form method="POST" action="{{ url_for('settings.update_rates') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="labor_rate">Labor Rate</label>
+                {{ form.labor_rate(class="form-control") }}
+            </div>
+            <div class="form-group">
+                <label for="material_rate">Material Rate</label>
+                {{ form.material_rate(class="form-control") }}
+            </div>
+            <div class="form-group">
+                <label for="equipment_rate">Equipment Rate</label>
+                {{ form.equipment_rate(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Rates</button>
+        </form>
+
+        <hr>
+
+        <h2 class="mt-4">Current Rates</h2>
+        <ul>
+            <li>Labor Rate: {{ current_rates.labor_rate }}</li>
+            <li>Material Rate: {{ current_rates.material_rate }}</li>
+            <li>Equipment Rate: {{ current_rates.equipment_rate }}</li>
+        </ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
